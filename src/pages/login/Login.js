@@ -3,6 +3,7 @@ import {customerUrl, sellerUrl} from "../../urls/url";
 import {Link, Navigate, useLocation, useNavigate} from "react-router-dom";
 import storageUtils from "../../utils/storageUtils";
 import UserContext from "../../context/context";
+import MyGoogleLogin from "../../components/googleLogin/MyGoogleLogin";
 // login router component
 
 
@@ -95,6 +96,7 @@ const Login = (props) => {
                 <Link to={'/register'}>register</Link><br/>
                 <button onClick={changeIdentityHandler}>{identity?<p>Login as Seller</p>:<p>Login as Customer</p>}</button>
             </div>
+            <MyGoogleLogin identity = {identity}/>
         </div>
     );
 };

@@ -7,7 +7,7 @@ const Cart = (props) => {
 
     return (
         <div>
-            {props.searchResult.map(item=><CartDetails item={item} key={item[0]}/>)}
+            {props.Result.map(item=><CartDetails item={item} key={item[0]}/>)}
         </div>
     );
 };

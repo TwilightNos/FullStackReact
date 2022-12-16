@@ -118,7 +118,7 @@ const Search = () => {
                                                       placeholder={0}/><br/>
                 <button type={"submit"}>Search</button>
             </form>
-            {withSearchResult && <Cart searchResult={searchResult}/>}
+            {withSearchResult && <Cart Result={searchResult}/>}
         </div>
     );
 };

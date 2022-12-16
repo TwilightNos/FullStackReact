@@ -11,7 +11,9 @@ const Customer = () => {
                 <TopNav/>
                 Hello,<Link to={'profile'}>{storageUtils.getUser().username}!</Link>
             </header>
-            <Link to={'customerSearch'}>Search new products!</Link>
+            <Link to={'customerSearch'}>Search new products!</Link><br/>
+            <Link to={'order'}>Your Cart</Link><br/>
+            <Link to={'history'}>history</Link>
             <Outlet/>
         </div>
     );

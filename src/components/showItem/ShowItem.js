@@ -41,7 +41,7 @@ const ShowItem = () => {
     return (
         <ItemContext.Provider value={{fetchData}}>
             <div>
-                {!isLoading&&<Cart searchResult={items}/>}
+                {!isLoading&&<Cart Result={items}/>}
             </div>
         </ItemContext.Provider>
     );

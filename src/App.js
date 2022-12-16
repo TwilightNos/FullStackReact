@@ -10,6 +10,8 @@ import Seller from "./pages/Seller/Seller";
 import Profile from "./pages/profile/Profile";
 import TopNav from "./components/top-nav/TopNav";
 import CustomerSearch from "./pages/Customer/CustomerSearch";
+import Order from "./components/order/Order";
+import History from "./components/order/history";
 
 function App() {
 
@@ -42,7 +44,8 @@ function App() {
             <Route path={'/register'} element={<Register/>}></Route>
             <Route path={"/customer"} element={<Customer/>}>
                 <Route path={'customerSearch'} element={<CustomerSearch/>}></Route>
-                <Route path={'order'}></Route>
+                <Route path={'order'} element={<Order/>}></Route>
+                <Route path={'history'} element={<History/>}></Route>
                 <Route path={'profile'} element={<Profile/>}></Route>
             </Route>
             <Route path={'/seller'} element={<Seller/>}>
