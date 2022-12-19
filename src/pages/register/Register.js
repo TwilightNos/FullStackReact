@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import {json, Link, useNavigate} from "react-router-dom";
-import {customerUrl, sellerUrl} from "../../urls/url";
+import {customerUrl, generalUrl, sellerUrl} from "../../urls/url";
 
 const Register = () => {
     // 重定向页面
@@ -12,6 +12,7 @@ const Register = () => {
         confirmPassword:'',
         email:'',
         address:'',
+        zipcode:0
     });
     // state存储当前身份, true = customer, false = seller
     const [identity,setIdentity] = useState(true);
@@ -50,6 +51,13 @@ const Register = () => {
         })
     }
 
+    const zipcodeChangeHandler = (event) =>{
+        setRegisterForm({
+            ...registerForm,
+            zipcode:event.target.value
+        })
+    }
+
 
     const submitRegisterForm = async (event) => {
         event.preventDefault();
@@ -60,7 +68,7 @@ const Register = () => {
             return;
         }
 
-        const registerUrl = identity?`${customerUrl}/customer`:`${sellerUrl}/seller`
+        const registerUrl = identity?`${generalUrl}/customer`:`${generalUrl}/seller`
         const res = await fetch(`${registerUrl}/register`,{
             method:'POST',
             body:JSON.stringify({
@@ -68,6 +76,7 @@ const Register = () => {
                 password:registerForm.password,
                 email:registerForm.email,
                 address:registerForm.address,
+                zipcode:registerForm.zipcode,
             }),
         });
         if(res.ok){
@@ -75,6 +84,7 @@ const Register = () => {
             if(response.state === false){
                 alert(response.message);
             }else{
+                alert(response.message);
                 navigate('/login',{
                     state: {
                         email: registerForm.email,
@@ -109,10 +119,14 @@ const Register = () => {
                     <label htmlFor="address"></label>
                     <input type="text" name={'address'} placeholder={'address'} onChange={addressChangeHandler} required={true}/><br/>
                 </div>
+                <div>
+                    <label htmlFor="zipcode"></label>
+                    <input type="text" name={'zipcode'} placeholder={'zipcode'} onChange={zipcodeChangeHandler} required={true}/>
+                </div>
                 <button type={"submit"}>Register</button>
             </form>
             <Link to={'/login'}>Login</Link><br/>
-            <button onClick={changeIdentityHandler}>{identity?<p>Login as Seller</p>:<p>Login as Customer</p>}</button>
+            <button onClick={changeIdentityHandler}>{identity?<p>Register as Seller</p>:<p>Register as Customer</p>}</button>
         </div>
     );
 };

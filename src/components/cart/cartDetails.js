@@ -1,12 +1,13 @@
 import React, {useContext, useEffect, useState} from 'react';
 import ModifyItemDetail from "./ModifyItemDetail";
-import {sellerUrl} from "../../urls/url";
+import {generalUrl, sellerUrl} from "../../urls/url";
 import UserContext from "../../context/context";
 import itemContext from "../../context/itemContext";
 
 const CartDetails = (props) => {
     const [isModify,setIsModify] = useState(false);
     const [haveItem,setHaveItem] = useState(false);
+    const [isExceedAmount,setIsExceedAmount] = useState(false);
 
     const usercxt = useContext(UserContext);
     const itemcxt = useContext(itemContext);
@@ -40,6 +41,9 @@ const CartDetails = (props) => {
         itemcxt.totalAmount += 1;
         itemcxt.totalPrice += props.item[2];
         setCurrItemAmount(itemcxt.items[index].amount);
+        if(currItemAmount===props.item[3]){
+            setIsExceedAmount(true);
+        }
         console.log(itemcxt);
     }
     const subAmountHandler = () => {
@@ -57,20 +61,22 @@ const CartDetails = (props) => {
     }
 
     useEffect(()=>{
-        const index = itemcxt.items.indexOf(itemcxt.items.find((item)=>{
-            return item.id === props.item[0];
-        }));
-        if(index!==-1){
-            setCurrItemAmount(itemcxt.items[index].amount);
-            setHaveItem(true);
-            console.log(currItemAmount);
+        if(itemcxt.items){
+            const index = itemcxt.items.indexOf(itemcxt.items.find((item) => {
+                return item.id === props.item[0];
+            }));
+            if(index!==-1){
+                setCurrItemAmount(itemcxt.items[index].amount);
+                setHaveItem(true);
+            }
         }
+
     })
 
 
     const deleteItemHandler = () => {
         async function deleteData(){
-            const res = await fetch(`${sellerUrl}/seller/delete_item`,{
+            const res = await fetch(`${generalUrl}/seller/delete_item`,{
                 method:'POST',
                 body:JSON.stringify({
                     email:usercxt.email,
@@ -80,6 +86,7 @@ const CartDetails = (props) => {
             if(res.ok){
                 const response = await res.json();
                 console.log(response);
+                alert('Success!');
                 itemcxt.fetchData();
             }
         }
@@ -105,11 +112,11 @@ const CartDetails = (props) => {
             {usercxt.identity?
                 haveItem?
                     <div>
-                        <button onClick={addAmountHandler}>+</button>
+                        <button onClick={addAmountHandler} disabled={currItemAmount>=props.item[3]}>+</button>
                         {currItemAmount}
                         <button onClick={subAmountHandler}>-</button>
                     </div>
-                    :<button onClick={addToCartClickHandler}>Add to Cart</button>
+                    :<button onClick={addToCartClickHandler} disabled={props.item[3]===0}>Add to Cart</button>
                 :null}
         </div>
     );

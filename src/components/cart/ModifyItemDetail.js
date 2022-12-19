@@ -1,6 +1,6 @@
 import React, {useContext, useState} from 'react';
 import seller from "../../pages/Seller/Seller";
-import {sellerUrl} from "../../urls/url";
+import {generalUrl, sellerUrl} from "../../urls/url";
 import UserContext from "../../context/context";
 import {useNavigate} from "react-router-dom";
 
@@ -53,7 +53,7 @@ const ModifyItemDetail = (props) => {
     const submitForm = (event) => {
         // event.preventDefault();
         async function fetchData(){
-            const res = await fetch(`${sellerUrl}/seller/update_item`,{
+            const res = await fetch(`${generalUrl}/seller/update_item`,{
                 method:'POST',
                 body:JSON.stringify({
                     email:usercxt.email,
@@ -68,6 +68,7 @@ const ModifyItemDetail = (props) => {
             if(res.ok){
                 const response = await res.json();
                 console.log(response);
+                alert('Success!');
             }
         }
         fetchData();

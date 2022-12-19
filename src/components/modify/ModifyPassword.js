@@ -1,6 +1,6 @@
-import React, {useCallback, useContext, useState} from 'react';
+import React, {useCallback, useContext, useEffect, useState} from 'react';
 import UserContext from "../../context/context";
-import {customerUrl, sellerUrl} from "../../urls/url";
+import {customerUrl, generalUrl, sellerUrl} from "../../urls/url";
 
 const ModifyPassword = () => {
 
@@ -10,6 +10,12 @@ const ModifyPassword = () => {
         confirmNewPassword:''
     });
     const usercxt = useContext(UserContext);
+    const [showModifyPassword,setShowModifyPassword] = useState(true);
+    useEffect(()=>{
+        if(usercxt.isGoogle===true){
+            setShowModifyPassword(false);
+        }
+    })
 
     const oldPasswordChangeListener = (event) =>{
         setPassword({
@@ -36,7 +42,7 @@ const ModifyPassword = () => {
         if(password.newPassword !== password.confirmNewPassword){
             alert('Password not match!');
         } else {
-            const url = usercxt.identity ? `${customerUrl}/customer` : `${sellerUrl}/seller`;
+            const url = usercxt.identity ? `${generalUrl}/customer` : `${generalUrl}/seller`;
             const res = await fetch(`${url}/modifyPassword`, {
                 method: 'POST',
                 body: JSON.stringify({
@@ -64,7 +70,8 @@ const ModifyPassword = () => {
                 <label htmlFor="newPassword">new password:</label>
                 <input type="password" name={'newPassword'} onChange={newPasswordChangeListener} required={true}/><br/>
                 <label htmlFor="confirmNewPassword">confirm new password:</label>
-                <input type="password" name={'confirmNewPassword'} onChange={confirmNewPasswordChangeListener} required={true}/><br/>
+                <input type="password" name={'confirmNewPassword'} onChange={confirmNewPasswordChangeListener}
+                       required={true}/><br/>
                 <button type={"submit"}>confirm</button>
             </form>
         </div>

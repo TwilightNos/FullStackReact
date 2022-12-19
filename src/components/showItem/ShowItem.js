@@ -1,5 +1,5 @@
 import React, {useCallback, useContext, useEffect, useState} from 'react';
-import {sellerUrl} from "../../urls/url";
+import {generalUrl, sellerUrl} from "../../urls/url";
 import UserContext from "../../context/context";
 import {useNavigate} from "react-router-dom";
 import Cart from "../cart/Cart";
@@ -18,7 +18,7 @@ const ShowItem = () => {
         if (usercxt.email === '') {
             navigate('/login');
         }
-        const res = await fetch(`${sellerUrl}/seller/show_item`, {
+        const res = await fetch(`${generalUrl}/seller/show_item`, {
             method: 'POST',
             body: JSON.stringify({
                 email: usercxt.email

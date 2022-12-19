@@ -12,9 +12,12 @@ const Seller = () => {
                 <TopNav/>
                 Hello,<Link to={'profile'}>{storageUtils.getUser().username}!</Link>
             </header>
-            <AddItem/>
-            <ShowItem/>
+            <Link to={'addItem'}>Add Item</Link><br/>
+            <Link to={'showItem'}>Show Item</Link><br/>
             <Outlet/>
+            {/*<AddItem/>*/}
+            {/*<ShowItem/>*/}
+
         </div>
     );
 };

@@ -1,11 +1,17 @@
 import React, {useCallback, useEffect, useState} from 'react';
 import Cart from "../cart/Cart";
-import {sellerUrl} from "../../urls/url";
+import {generalUrl, sellerUrl} from "../../urls/url";
+import {useLocation} from "react-router-dom";
 
 const Search = () => {
+
+
+    const location = useLocation();
+    const initialContent = location.state;
+
     const [withSearchResult,setWithSearchResult] = useState(false);
     const [searchContent,setSearchContent] = useState({
-        content:'',
+        content:initialContent?initialContent.name:'',
         order:true, // true represents ascending
         lowestPrice:0,
         highestPrice:1000000
@@ -43,7 +49,7 @@ const Search = () => {
 
     const fetchData = useCallback(async ()=>{
         setWithSearchResult(false);
-        const res = await fetch(`${sellerUrl}/customer/search`,{
+        const res = await fetch(`${generalUrl}/customer/search`,{
             method:'POST',
             body:JSON.stringify({
                 search_details:searchContent.content,
@@ -106,7 +112,7 @@ const Search = () => {
         <div>
             <form onSubmit={submitFormHandler}>
                 <label htmlFor="Search">Search:</label>
-                <input type="text" placeholder={'please enter a product'} onChange={searchChangeHandler} id={'Search'}/><br/>
+                <input type="text" placeholder={'please enter a product'} defaultValue={searchContent.content} onChange={searchChangeHandler} id={'Search'}/><br/>
                 <label htmlFor="Filter">Order</label><br/>
                 <select name="" id="" onChange={orderChangeHandler}>
                     <option value={"increasing_order"}>From low to high</option>

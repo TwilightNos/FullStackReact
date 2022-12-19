@@ -12,6 +12,8 @@ import TopNav from "./components/top-nav/TopNav";
 import CustomerSearch from "./pages/Customer/CustomerSearch";
 import Order from "./components/order/Order";
 import History from "./components/order/history";
+import AddItem from "./components/addItem/AddItem";
+import ShowItem from "./components/showItem/ShowItem";
 
 function App() {
 
@@ -50,6 +52,8 @@ function App() {
             </Route>
             <Route path={'/seller'} element={<Seller/>}>
                 <Route path={'profile'} element={<Profile/>}></Route>
+                <Route path={'addItem'} element={<AddItem/>}></Route>
+                <Route path={'showItem'} element={<ShowItem/>}></Route>
             </Route>
         </Routes>
     </div>

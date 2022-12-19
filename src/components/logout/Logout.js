@@ -4,7 +4,7 @@ import storageUtils from "../../utils/storageUtils";
 import {useGoogleLogout} from "react-google-login";
 import UserContext from "../../context/context";
 
-const clientID = '767372855342-s56pu56vmd9bchbeie7cmblfenpsbib6.apps.googleusercontent.com';
+const clientID = '211959893244-lbduhp27rkejtrpvdffqliqutgpn55bf.apps.googleusercontent.com';
 const Logout = () => {
     const navigate = useNavigate();
     const usercxt = useContext(UserContext);

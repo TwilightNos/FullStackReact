@@ -1,7 +1,7 @@
 import React, {useContext, useEffect} from 'react';
 import {GoogleLogin} from 'react-google-login';
 import {gapi} from "gapi-script";
-import {customerUrl,sellerUrl} from "../../urls/url";
+import {customerUrl, generalUrl, sellerUrl} from "../../urls/url";
 import UserContext from "../../context/context";
 import {useNavigate} from "react-router-dom";
 import storageUtils from "../../utils/storageUtils";
@@ -9,7 +9,7 @@ import storageUtils from "../../utils/storageUtils";
 
 // 导入google clientID
 
-const clientID = '767372855342-s56pu56vmd9bchbeie7cmblfenpsbib6.apps.googleusercontent.com';
+const clientID = '211959893244-lbduhp27rkejtrpvdffqliqutgpn55bf.apps.googleusercontent.com';
 
 const MyGoogleLogin = (props) => {
 
@@ -32,9 +32,9 @@ const MyGoogleLogin = (props) => {
         // console.log('success:',res);
         const fetchData = async () => {
 
-            const loginUrl = props.identity?`${customerUrl}/customer`:`${sellerUrl}/seller`
+            const loginUrl = props.identity?`${generalUrl}/customer`:`${generalUrl}/seller`
 
-            const resp = await fetch(`${loginUrl}/googlelogin`,{
+            const resp = await fetch(`${loginUrl}/googleLogin`,{
                 method:'POST',
                 body:JSON.stringify({
                     email:res.profileObj.email,
@@ -50,9 +50,11 @@ const MyGoogleLogin = (props) => {
                         username:res.profileObj.name,
                         address:'',
                         identity:props.identity,
+                        isGoogle:true,
                     })
-                    usercxt.username = res.profileObj.name
-                    usercxt.email = res.profileObj.email
+                    usercxt.username = res.profileObj.name;
+                    usercxt.email = res.profileObj.email;
+                    usercxt.isGoogle=true;
                     navigate(props.identity?"/customer":"/seller")
                 }
             }

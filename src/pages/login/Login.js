@@ -1,5 +1,5 @@
 import React, {useContext, useEffect, useState} from 'react';
-import {customerUrl, sellerUrl} from "../../urls/url";
+import {customerUrl, generalUrl, sellerUrl} from "../../urls/url";
 import {Link, Navigate, useLocation, useNavigate} from "react-router-dom";
 import storageUtils from "../../utils/storageUtils";
 import UserContext from "../../context/context";
@@ -57,13 +57,20 @@ const Login = (props) => {
         event.preventDefault();
         // remove current user if exits
         storageUtils.removeUser();
-        const loginUrl = identity?`${customerUrl}/customer`:`${sellerUrl}/seller`;
+        const loginUrl = identity?`${generalUrl}/customer`:`${generalUrl}/seller`;
         const res = await fetch(`${loginUrl}/login`,{
             method:"POST",
+            // headers:{
+            //     "Access-Control-Allow-Origin":"http://localhost:3000",
+            //     "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
+            //     "Access-Control-Allow-Headers": "Content-Type",
+            //     "Content-Type":"application/json"
+            // },
             body:JSON.stringify(loginData),
         });
         if(res.ok){
             const resp = await res.json();
+            console.log(resp);
             if(resp.state === true){
                 storageUtils.saveUser({
                     email:loginData.email,

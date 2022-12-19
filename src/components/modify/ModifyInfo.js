@@ -1,6 +1,7 @@
 import React, {useCallback, useContext, useState} from 'react';
 import UserContext from "../../context/context";
-import {customerUrl, sellerUrl} from "../../urls/url";
+import {customerUrl, generalUrl, sellerUrl} from "../../urls/url";
+import storageUtils from "../../utils/storageUtils";
 
 const ModifyInfo = () => {
 
@@ -24,17 +25,31 @@ const ModifyInfo = () => {
         })
     }
     const updateData = useCallback(async ()=>{
-        const url = usercxt.identity?`${customerUrl}/customer`:`${sellerUrl}/seller`
-        const res = await fetch(`${url}/modifyInfo`,{
+        const url = usercxt.identity?`${generalUrl}/customer`:`${generalUrl}/seller`
+        console.log({
+            email:usercxt.email,
+            username:userData.username,
+            address:userData.address,
+        });
+        const res = await fetch(`${url}/modifyinfo`,{
             method:'POST',
             body:JSON.stringify({
                 email:usercxt.email,
                 username:userData.username,
                 address:userData.address,
             })
-        });
+        },[]);
         if(res.ok){
             const response = await res.json();
+            storageUtils.removeUser();
+            usercxt.username = userData.username;
+            usercxt.address = userData.address;
+            storageUtils.saveUser({
+                email:usercxt.email,
+                username:usercxt.username,
+                address:usercxt.address,
+                identity:usercxt.identity,
+            })
             console.log(response);
         }
     })
