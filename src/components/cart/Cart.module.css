@@ -1,0 +1,7 @@
+.Cart{
+    padding-left: 20%;
+    padding-right: 35%;
+    height: 610px;
+    overflow: auto;
+    background-color: #afdfe4;
+}

@@ -3,19 +3,23 @@ import TopNav from "../../components/top-nav/TopNav";
 import {Link, Outlet} from "react-router-dom";
 import storageUtils from "../../utils/storageUtils";
 import Search from "../../components/search/Search";
+import classes from './Customer.module.css';
+
 
 const Customer = () => {
     return (
-        <div>
-            <header>
+        <>
+            <header className={classes.header}>
                 <TopNav/>
-                Hello,<Link to={'profile'}>{storageUtils.getUser().username}!</Link>
+                <div className={classes.hello}>Hello,<Link to={'profile'}>{storageUtils.getUser().username}!</Link></div>
             </header>
-            <Link to={'customerSearch'}>Search new products!</Link><br/>
-            <Link to={'order'}>Your Cart</Link><br/>
-            <Link to={'history'}>history</Link>
+            <div className={classes.navbar}>
+                <Link to={'customerSearch'} className={classes.Link}>Search new products!</Link>
+                <Link to={'order'} className={classes.Link}>Your Cart</Link>
+                <Link to={'history'} className={classes.Link}>history</Link>
+            </div>
             <Outlet/>
-        </div>
+        </>
     );
 };
 

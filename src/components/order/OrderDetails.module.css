@@ -1,0 +1,13 @@
+.price{
+    float: right;
+    margin-right: 50px;
+}
+.price::before{
+    content: '$';
+}
+.OrderDetails{
+    border:solid;
+    border-color: #bfa;
+    border-radius: 50px;
+    padding-bottom: 15px;
+}

@@ -4,6 +4,7 @@ import itemContext from "../../context/itemContext";
 import OrderDetails from "./OrderDetails";
 import {compositeUrl, customerUrl, generalUrl} from "../../urls/url";
 import {useNavigate} from "react-router-dom";
+import classes from './Order.module.css';
 
 const Order = () => {
 
@@ -32,6 +33,7 @@ const Order = () => {
             itemcxt.items = [];
             itemcxt.totalPrice = 0;
             itemcxt.totalAmount = 0;
+            navigate('/customer/customerSearch');
         }
     },[])
 
@@ -49,7 +51,7 @@ const Order = () => {
 
             const timestamp = year+"-"+month+"-"+day+" "+hour+":"+minute+":"+second;
             placeOrder(timestamp);
-            navigate('/customer/customerSearch');
+
         }else{
             alert('Please Add Your Address First!');
             navigate('/customer/profile');
@@ -60,10 +62,10 @@ const Order = () => {
 
 
     return (
-        <div>
+        <div className={classes.order}>
             {itemcxt.items.map(item=><OrderDetails item={item} key={item.index}/>)}
-            total price:{itemcxt.totalPrice} <br/>
-            <button onClick={purchaseClickHandler}>Purchase</button>
+            <p className={classes.totalPrice}>Total Price: <div className={classes.totalPriceContent}>{itemcxt.totalPrice}</div></p>
+            <button onClick={purchaseClickHandler} className={classes.purchaseButton}>Purchase</button>
         </div>
     );
 };

@@ -2,6 +2,7 @@ import React, {useCallback, useEffect, useState} from 'react';
 import Cart from "../cart/Cart";
 import {generalUrl, sellerUrl} from "../../urls/url";
 import {useLocation} from "react-router-dom";
+import classes from './Search.module.css'
 
 const Search = () => {
 
@@ -73,7 +74,7 @@ const Search = () => {
     const submitFormHandler = async (e) => {
         e.preventDefault();
         if (searchContent.highestPrice < searchContent.lowestPrice) {
-            alert('illegal filter!');
+            // alert('illegal filter!');
         }
         if(searchContent.lowestPrice === ''){
             setSearchContent({
@@ -109,20 +110,26 @@ const Search = () => {
 
 
     return (
-        <div>
-            <form onSubmit={submitFormHandler}>
-                <label htmlFor="Search">Search:</label>
-                <input type="text" placeholder={'please enter a product'} defaultValue={searchContent.content} onChange={searchChangeHandler} id={'Search'}/><br/>
-                <label htmlFor="Filter">Order</label><br/>
-                <select name="" id="" onChange={orderChangeHandler}>
-                    <option value={"increasing_order"}>From low to high</option>
-                    <option value={"decreasing_order"}>From high to low</option>
-                </select><br/>
-                <label htmlFor="">Price range</label><br/>
-                from <input type="number" onChange={lowestPriceChangeHandler}
-                            placeholder={0}/>to<input type="number" onChange={highestPriceChangeHandler}
-                                                      placeholder={0}/><br/>
-                <button type={"submit"}>Search</button>
+        <div className={classes.background}>
+            <form onSubmit={submitFormHandler} className={classes.searchForm}>
+                <div className={classes.labels}>
+                    <label htmlFor="Search">Search: </label>
+                    <input type="text" placeholder={'please enter a product'} defaultValue={searchContent.content} onChange={searchChangeHandler} id={'Search'}/>
+                </div>
+                <div>
+                    <label htmlFor="Filter">Order </label>
+                    <select name="" id="" onChange={orderChangeHandler}>
+                        <option value={"increasing_order"}>From low to high</option>
+                        <option value={"decreasing_order"}>From high to low</option>
+                    </select>
+                </div>
+                <div>
+                <label htmlFor="">Price range: </label>
+                from <input type="number" onChange={lowestPriceChangeHandler} className={classes.priceInput}
+                            placeholder={0}/>  to  <input type="number" onChange={highestPriceChangeHandler} className={classes.priceInput}
+                                                      placeholder={0}/>
+                </div>
+                <button type={"submit"} className={classes.button}>Search</button>
             </form>
             {withSearchResult && <Cart Result={searchResult}/>}
         </div>

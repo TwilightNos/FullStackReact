@@ -3,6 +3,7 @@ import ModifyItemDetail from "./ModifyItemDetail";
 import {generalUrl, sellerUrl} from "../../urls/url";
 import UserContext from "../../context/context";
 import itemContext from "../../context/itemContext";
+import classes from './cartDetails.module.css';
 
 const CartDetails = (props) => {
     const [isModify,setIsModify] = useState(false);
@@ -44,7 +45,7 @@ const CartDetails = (props) => {
         if(currItemAmount===props.item[3]){
             setIsExceedAmount(true);
         }
-        console.log(itemcxt);
+        // console.log(itemcxt);
     }
     const subAmountHandler = () => {
         const index = itemcxt.items.indexOf(itemcxt.items.find((item)=>{
@@ -85,7 +86,7 @@ const CartDetails = (props) => {
             })
             if(res.ok){
                 const response = await res.json();
-                console.log(response);
+                // console.log(response);
                 alert('Success!');
                 itemcxt.fetchData();
             }
@@ -95,29 +96,29 @@ const CartDetails = (props) => {
     }
 
     return (
-        <div>
+        <div className={classes.cartDetails}>
             {!isModify&&<ul>
-                <li>name: {props.item[1]}</li>
-                <li>price: {props.item[2]}</li>
+                <li>{props.item[1]}</li>
+                <li><div className={classes.price}>{props.item[2]}</div></li>
                 <li>amount: {props.item[3]}</li>
-                <li>description: {props.item[4]}</li>
-                <li><img src={props.item[5]} alt=""/></li>
+                <li>{props.item[4]}</li>
+                <li className={classes.imgOuter}><img src={props.item[5]} alt = "" className={classes.img}/></li>
             </ul>}
-            {isModify&&<ModifyItemDetail item = {props.item}/>}
-            {isModify&&<button onClick={clickModifyHandler}>Cancel</button>}<br/>
-            {usercxt.identity?null:<button onClick={clickModifyHandler}>Modify</button>}
+            <div className={classes.modifyItem}>{isModify&&<ModifyItemDetail item = {props.item}/>}</div>
+            <div className={classes.cancelModify}>{isModify&&<button onClick={clickModifyHandler}>Cancel</button>}</div>
+            {usercxt.identity?null:<button className={classes.modifyButton} onClick={clickModifyHandler}>Modify</button>}
             {usercxt.identity?null:<button onClick={() => {
                 deleteItemHandler();
             }}>Delete</button>}
-            {usercxt.identity?
+            <div className={classes.addToCart}>{usercxt.identity?
                 haveItem?
                     <div>
-                        <button onClick={addAmountHandler} disabled={currItemAmount>=props.item[3]}>+</button>
+                        <button onClick={addAmountHandler} className={classes.AddSubButton} disabled={currItemAmount>=props.item[3]}>+</button>
                         {currItemAmount}
-                        <button onClick={subAmountHandler}>-</button>
+                        <button onClick={subAmountHandler} className={classes.AddSubButton}>-</button>
                     </div>
-                    :<button onClick={addToCartClickHandler} disabled={props.item[3]===0}>Add to Cart</button>
-                :null}
+                    :<button onClick={addToCartClickHandler} className={classes.AddToCartButton} disabled={props.item[3]===0}>Add to Cart</button>
+                :null}</div>
         </div>
     );
 };

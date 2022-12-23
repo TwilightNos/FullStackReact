@@ -4,6 +4,11 @@ import {Link, Navigate, useLocation, useNavigate} from "react-router-dom";
 import storageUtils from "../../utils/storageUtils";
 import UserContext from "../../context/context";
 import MyGoogleLogin from "../../components/googleLogin/MyGoogleLogin";
+import classes from './Login.module.css';
+
+
+
+
 // login router component
 
 
@@ -90,20 +95,22 @@ const Login = (props) => {
         }
     }
     return (
-        <div>
-            <header>Login</header>
+        <div className={classes.background}>
+
             <div>
-                <form onSubmit={submitLogin}>
+                <form onSubmit={submitLogin} className={classes.form}>
+                    <header>{identity?'Customer Login':'Seller Login'}</header>
                     <label htmlFor="email"></label>
                     <input type="text" name={"email"} onChange={emailChangeHandler} placeholder={"email"} defaultValue={loginData.email}/><br/>
                     <label htmlFor="password"></label>
                     <input type="password" name={"password"} onChange={passwordChangeHandler} placeholder={"password"} defaultValue={loginData.password}/><br/>
                     <button type={"submit"}>Login</button>
                 </form>
-                <Link to={'/register'}>register</Link><br/>
-                <button onClick={changeIdentityHandler}>{identity?<p>Login as Seller</p>:<p>Login as Customer</p>}</button>
+                <div className={classes.goToRegister}><Link to={'/register'}>Go to register</Link></div>
+                <button className={classes.button} onClick={changeIdentityHandler}>{identity?<div>Login as Seller</div>:<div>Login as Customer</div>}</button>
+                <div className={classes.googleLogin}><MyGoogleLogin identity = {identity}/></div>
             </div>
-            <MyGoogleLogin identity = {identity}/>
+
         </div>
     );
 };

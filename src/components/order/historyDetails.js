@@ -1,6 +1,7 @@
 import React, {useCallback, useEffect, useState} from 'react';
 import {compositeUrl, customerUrl, generalUrl, orderUrl} from "../../urls/url";
 import {useNavigate} from "react-router-dom";
+import classes from './historyDetails.module.css';
 
 const HistoryDetails = (props) => {
 
@@ -11,7 +12,7 @@ const HistoryDetails = (props) => {
 
     const fetchOrder = useCallback(async ()=>{
 
-        const res = await fetch(`${generalUrl}/compose/order_details`,{
+        const res = await fetch(`${generalUrl}/customer/order_details`,{
             method:"POST",
             body:JSON.stringify({
                 oid:props.item[0]
@@ -19,6 +20,7 @@ const HistoryDetails = (props) => {
         });
         if(res.ok){
             const response = await res.json();
+            console.log(response);
             setOrderDetail(response.data)
         }
     },[]);
@@ -36,11 +38,11 @@ const HistoryDetails = (props) => {
 
 
     return (
-        <div>
-            <ul>
-                <li onClick={showOrderDetail}>Order ID: {props.item[0]}</li>
+        <div className={classes.OrderDetails}>
+            <ul className={classes.ul}>
+                <li onClick={showOrderDetail} className={classes.OrderID}>Order ID: {props.item[0]}</li>
                 <li>Time: {props.item[1]}</li>
-                {showDetail&&orderDetail.map(item=><div onClick={()=>{
+                {showDetail&&orderDetail.map(item=><div className={classes.itemName} onClick={()=>{
                     redirectToSearch(item.name);
                 }}>
                     {/*id:{item.id}<br/>*/}

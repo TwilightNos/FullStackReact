@@ -1,0 +1,44 @@
+.profile {
+    list-style:none;
+    width: 400px;
+    height: 150px;
+    display: flex;
+    flex-direction: column;
+    padding: 40px;
+    text-align: left;
+    position: relative;
+    z-index: 100;
+    background: inherit;
+    border-radius: 18px;
+    overflow: hidden;
+}
+ul li{
+    list-style-type:none;
+}
+
+.button{
+    margin-left:60px;
+    margin-top: 15px;
+    width:100px;
+    border:10px;
+    height:36px;
+    border-radius: 4px;
+    text-align: center;
+    background-color: rgba(57, 88, 69, 0.4);
+    color: white;
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+    transition: 0.4s;
+}
+.button:hover {
+    background-color: rgba(12, 80, 38, 0.67);
+    box-shadow: 0 0px 0px 0 rgba(0,0,0,0.2), 0 0px 0px 0 rgba(0,0,0,0.19);
+
+}
+.form Link,
+.form button:hover {
+    background-color: rgba(12, 80, 38, 0.67);
+    box-shadow: 0 0px 0px 0 rgba(0,0,0,0.2), 0 0px 0px 0 rgba(0,0,0,0.19);
+
+}

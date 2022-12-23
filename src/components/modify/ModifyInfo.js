@@ -2,6 +2,7 @@ import React, {useCallback, useContext, useState} from 'react';
 import UserContext from "../../context/context";
 import {customerUrl, generalUrl, sellerUrl} from "../../urls/url";
 import storageUtils from "../../utils/storageUtils";
+import classes from './ModifyInfo.module.css';
 
 const ModifyInfo = () => {
 
@@ -50,7 +51,7 @@ const ModifyInfo = () => {
                 address:usercxt.address,
                 identity:usercxt.identity,
             })
-            console.log(response);
+            alert(response.message);
         }
     })
 
@@ -61,7 +62,7 @@ const ModifyInfo = () => {
 
     return (
         <div>
-            <form onSubmit={submitUserDataHandler}>
+            <form className={classes.form} onSubmit={submitUserDataHandler}>
                 <label htmlFor="username">username:</label>
                 <input type="text" name={'username'} defaultValue={usercxt.username} onChange={usernameChangeListener}/><br/>
                 <label htmlFor="address">address:</label>

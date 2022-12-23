@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import {json, Link, useNavigate} from "react-router-dom";
 import {customerUrl, generalUrl, sellerUrl} from "../../urls/url";
-
+import classes from './Register.module.css';
 const Register = () => {
     // 重定向页面
     const navigate = useNavigate();
@@ -97,36 +97,39 @@ const Register = () => {
     }
 
     return (
-        <div>
-            <form onSubmit={submitRegisterForm}>
-                <div>
-                    <label htmlFor="email"></label>
-                    <input type="email" name={'email'} placeholder={'email'} onChange={emailChangeHandler} required={true}/><br/>
-                </div>
-                <div>
-                    <label htmlFor="username"></label>
-                    <input type="text" name={'username'} placeholder={'username'} onChange={usernameChangeHandler} required={true}/><br/>
-                </div>
-                <div>
-                    <label htmlFor="password"></label>
-                    <input type="password" name={'password'} placeholder={'password'} onChange={passwordChangeHandler} required={true}/><br/>
-                </div>
-                <div>
-                    <label htmlFor="confirmPassword"></label>
-                    <input type="password" name={'confirmPassword'} placeholder={'confirm password'} onChange={confirmPasswordChangeHandler} required={true}/><br/>
-                </div>
-                <div>
-                    <label htmlFor="address"></label>
-                    <input type="text" name={'address'} placeholder={'address'} onChange={addressChangeHandler} required={true}/><br/>
-                </div>
-                <div>
-                    <label htmlFor="zipcode"></label>
-                    <input type="text" name={'zipcode'} placeholder={'zipcode'} onChange={zipcodeChangeHandler} required={true}/>
-                </div>
-                <button type={"submit"}>Register</button>
-            </form>
-            <Link to={'/login'}>Login</Link><br/>
-            <button onClick={changeIdentityHandler}>{identity?<p>Register as Seller</p>:<p>Register as Customer</p>}</button>
+        <div className= {classes.back}>
+            <div className={classes.background}>
+                <header className={classes.header}>{identity?'Customer Register':'Seller Register'}</header>
+                <form onSubmit={submitRegisterForm} className={classes.registerform}>
+                    <div>
+                        <label htmlFor="email"></label>
+                        <input type="email" name={'email'} placeholder={'email'} onChange={emailChangeHandler} required={true}/><br/>
+                    </div>
+                    <div>
+                        <label htmlFor="username"></label>
+                        <input type="text" name={'username'} placeholder={'username'} onChange={usernameChangeHandler} required={true}/><br/>
+                    </div>
+                    <div>
+                        <label htmlFor="password"></label>
+                        <input type="password" name={'password'} placeholder={'password'} onChange={passwordChangeHandler} required={true}/><br/>
+                    </div>
+                    <div>
+                        <label htmlFor="confirmPassword"></label>
+                        <input type="password" name={'confirmPassword'} placeholder={'confirm password'} onChange={confirmPasswordChangeHandler} required={true}/><br/>
+                    </div>
+                    <div>
+                        <label htmlFor="address"></label>
+                        <input type="text" name={'address'} placeholder={'address'} onChange={addressChangeHandler} required={true}/><br/>
+                    </div>
+                    <div>
+                        <label htmlFor="zipcode"></label>
+                        <input type="text" name={'zipcode'} placeholder={'zipcode'} onChange={zipcodeChangeHandler} required={true}/>
+                    </div>
+                    <button type={"submit"} className={classes.register}>Register</button>
+                </form>
+                <button className={classes.button} onClick={changeIdentityHandler}>{identity?<p>Register as Seller</p>:<p>Register as Customer</p>}</button>
+                <Link className={classes.button} to={'/login'}>Go to Login</Link><br/>
+            </div>
         </div>
     );
 };

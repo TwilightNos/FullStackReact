@@ -3,6 +3,7 @@ import Logout from "../logout/Logout";
 import UserContext from "../../context/context";
 import {Link} from "react-router-dom";
 import storageUtils from "../../utils/storageUtils";
+import classes from './TopNav.module.css'
 
 const TopNav = () => {
     const usercxt = useContext(UserContext);
@@ -14,9 +15,9 @@ const TopNav = () => {
     },[storageUtils.getUser()]);
 
     return (
-        <div>
-            <Link to={'/'}>Home</Link>
-            {!showLogout?null:<Logout/>}
+        <div className={classes.out}>
+            <div className={classes.home}><Link to={'/'}>Home</Link></div>
+            <div className={classes.logout}>{!showLogout?null:<Logout/>}</div>
         </div>
     );
 };

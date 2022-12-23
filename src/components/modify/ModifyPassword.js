@@ -1,6 +1,7 @@
 import React, {useCallback, useContext, useEffect, useState} from 'react';
 import UserContext from "../../context/context";
 import {customerUrl, generalUrl, sellerUrl} from "../../urls/url";
+import classes from './ModifyInfo.module.css';
 
 const ModifyPassword = () => {
 
@@ -64,7 +65,7 @@ const ModifyPassword = () => {
 
     return (
         <div>
-            <form onSubmit={submitModifyPasswordHandler}>
+            <form onSubmit={submitModifyPasswordHandler} className={classes.form}>
                 <label htmlFor="oldPassword">old password:</label>
                 <input type="password" name={'oldPassword'} onChange={oldPasswordChangeListener} required={true}/><br/>
                 <label htmlFor="newPassword">new password:</label>

@@ -26,7 +26,7 @@ const ShowItem = () => {
         });
         if (res.ok) {
             const response = await res.json();
-            console.log(response);
+            // console.log(response);
             setItems(response);
             setIsLoading(false);
         }

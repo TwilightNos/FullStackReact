@@ -1,0 +1,23 @@
+.OrderDetails{
+    border:solid;
+    margin-right: 40%;
+    border-radius: 15px;
+    border-color: #bfa;
+}
+.OrderID{
+    text-decoration:underline;
+    cursor: pointer;
+}
+.OrderID:hover{
+    color:red;
+}
+.itemName{
+    text-decoration: underline;
+    cursor: pointer;
+}
+.itemName:hover{
+    color:blue;
+}
+.ul{
+    padding-left: 0;
+}

@@ -3,6 +3,7 @@ import seller from "../../pages/Seller/Seller";
 import {generalUrl, sellerUrl} from "../../urls/url";
 import UserContext from "../../context/context";
 import {useNavigate} from "react-router-dom";
+import classes from './ModifyItemDetail.module.css';
 
 const ModifyItemDetail = (props) => {
 
@@ -53,7 +54,7 @@ const ModifyItemDetail = (props) => {
     const submitForm = (event) => {
         // event.preventDefault();
         async function fetchData(){
-            const res = await fetch(`${generalUrl}/seller/update_item`,{
+            const res = await fetch(`${generalUrl}/compose/update_merchandise`,{
                 method:'POST',
                 body:JSON.stringify({
                     email:usercxt.email,
@@ -87,7 +88,7 @@ const ModifyItemDetail = (props) => {
                 <input type="text" name={"description"} defaultValue={props.item[4]} onChange={descriptionChangeListener}/><br/>
                 <label htmlFor="url">image url:</label>
                 <input type="text" name={"url"} defaultValue={props.item[5]} onChange={imageChangeListener}/><br/>
-                <button type={"submit"}>Confirm</button>
+                <button type={"submit"} className={classes.confirm}>Confirm</button>
             </form>
         </div>
     );

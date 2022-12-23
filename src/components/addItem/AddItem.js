@@ -2,6 +2,7 @@ import React, {useContext, useState} from 'react';
 import {compositeUrl, generalUrl, sellerUrl} from "../../urls/url";
 import UserContext from "../../context/context";
 import itemContext from "../../context/itemContext";
+import classes from './AddItem.module.css';
 
 const AddItem = () => {
 
@@ -79,9 +80,9 @@ const AddItem = () => {
 
 
     return (
-        <div>
+        <div className={classes.background}>
             {/*<button onClick={addItemClickHandler}>Add item</button>*/}
-            <form onSubmit={submitNewItemHandler}>
+            <form onSubmit={submitNewItemHandler} className={classes.form}>
                 <label htmlFor="name">name:</label>
                 <input type="text" name={"name"} onChange={nameChangeListener} required={true}/><br/>
                 <label htmlFor="price">price:</label>

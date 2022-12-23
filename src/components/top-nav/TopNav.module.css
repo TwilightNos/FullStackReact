@@ -1,0 +1,12 @@
+.logout{
+    float: right;
+}
+
+.home{
+    font-size: 20px;
+    display: flex;
+}
+
+.out{
+    /*display: flex;*/
+}

@@ -1,0 +1,61 @@
+li{
+    list-style: none;
+}
+
+.addToCart{
+    text-align: right;
+    margin-right: 50px;
+    margin-bottom: 10px;
+}
+ul{
+    margin-bottom: 0;
+    margin-top: 2%;
+}
+
+.price::before{
+    content:'$';
+}
+.price{
+    float: right;
+    margin-right: 50px;
+}
+.AddSubButton{
+    border-radius: 50%;
+    margin-left: 5px;
+    margin-right: 5px;
+    background-color: yellowgreen;
+}
+.AddToCartButton{
+    border-radius: 5%;
+    border: none;
+    background-color: yellowgreen;
+}
+.cartDetails{
+    background-color: whitesmoke;
+    border: solid;
+    border-color: #bfa;
+    border-radius: 30px;
+    overflow: hidden;
+}
+
+.imgOuter{
+    height: 200px;
+    width: 200px;
+    border: none;
+}
+.img{
+    width: 100%;
+    height: 100%;
+}
+
+.modifyItem{
+    margin-left: 10px;
+}
+.cancelModify{
+    float: right;
+    margin-right: 10px;
+}
+.modifyButton{
+    margin-left: 20px;
+    margin-top: 30px;
+}

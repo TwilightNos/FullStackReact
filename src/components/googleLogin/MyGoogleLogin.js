@@ -48,7 +48,7 @@ const MyGoogleLogin = (props) => {
                     storageUtils.saveUser({
                         email:res.profileObj.email,
                         username:res.profileObj.name,
-                        address:'',
+                        // address:res.profileObj.address,
                         identity:props.identity,
                         isGoogle:true,
                     })

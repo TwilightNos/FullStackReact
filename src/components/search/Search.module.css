@@ -1,0 +1,16 @@
+.searchForm{
+    height: 100px;
+    padding: 0;
+    width: auto;
+}
+
+.priceInput{
+    width: 50px;
+}
+.background{
+    background-color: #afdfe4;
+}
+.button{
+    width: 60px;
+    margin-left: 48%;
+}
